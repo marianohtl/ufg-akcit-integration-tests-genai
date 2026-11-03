@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Listagem de decks e flashcards de uma coleção do Flashcard Service." />
+  <!--
+    Endereço da API. Deixe vazio para detecção automática:
+    - página servida pelo próprio Spring (porta 8080): usa a mesma origem;
+    - página servida por um dev server (ex.: 5500) ou aberta via file://: usa http://localhost:8080;
+    - em outro ambiente, informe a URL completa, ex.: content="https://api.exemplo.com".
+  -->
+  <meta name="api-base-url" content="" />
+  <title>Core Flashcards · Explorar coleção</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%235b5bd6'/%3E%3Cpath d='M7 12l9-5 9 5-9 5-9-5Zm0 5 9 5 9-5m-18 5 9 5 9-5' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topbar">
+    <div class="container topbar__inner">
+      <a class="brand" href="./">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 8.5 12 4l8 4.5-8 4.5-8-4.5Z" />
+            <path d="m4 13 8 4.5 8-4.5" />
+            <path d="m4 17.5 8 4.5 8-4.5" />
+          </svg>
+        </span>
+        <span class="brand__text">
+          <strong>Core Flashcards</strong>
+          <span>Flashcard Service</span>
+        </span>
+      </a>
+
+      <div class="topbar__meta">
+        <span class="api-badge" id="api-badge" title="Endereço da API">
+          <span class="api-badge__dot" aria-hidden="true"></span>
+          <span class="api-badge__label" id="api-label">API</span>
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main id="conteudo" class="container main" tabindex="-1">
+    <section class="hero" aria-labelledby="page-title">
+      <span class="eyebrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m12 3 1.8 4.9L19 9.7l-5.2 1.8L12 16.4l-1.8-4.9L5 9.7l5.2-1.8L12 3Z" />
+          <path d="M19 15.5 19.8 18l2.2.8-2.2.8L19 22l-.8-2.4-2.2-.8 2.2-.8.8-2.5Z" />
+        </svg>
+        Listagem de coleção
+      </span>
+
+      <h1 id="page-title">Todos os seus <span class="text-gradient">decks e flashcards</span> em um só lugar</h1>
+
+      <p class="hero__lead">
+        Consulte uma coleção pelo identificador para visualizar os decks e cards retornados por
+        <code>GET /api/collections/{id}</code>.
+      </p>
+
+      <form class="search" id="collection-form" novalidate>
+        <div class="search__field">
+          <span class="search__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="7" />
+              <path d="m20 20-3.4-3.4" />
+            </svg>
+          </span>
+          <label class="sr-only" for="collection-id">ID da coleção</label>
+          <input
+            class="search__input"
+            id="collection-id"
+            name="collectionId"
+            type="text"
+            placeholder="Cole o ID da coleção (UUID)"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+            aria-describedby="collection-id-hint"
+          />
+          <button class="btn btn--primary" id="load-btn" type="submit">
+            <span class="btn__label">Carregar coleção</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14" />
+              <path d="m13 6 6 6-6 6" />
+            </svg>
+          </button>
+        </div>
+        <p class="search__hint" id="collection-id-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" />
+            <path d="M12 11v5" />
+            <path d="M12 8h.01" />
+          </svg>
+          O ID é o <code>collectionId</code> retornado ao criar uma coleção.
+        </p>
+      </form>
+    </section>
+
+    <p id="status" class="sr-only" role="status" aria-live="polite"></p>
+
+    <div id="result" class="result"></div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container site-footer__inner">
+      <p>Core Flashcards · <span id="year">2026</span> · Dados via <code>GET /api/collections/{id}</code></p>
+      <a id="swagger-link" href="/swagger-ui/index.html" target="_blank" rel="noopener">
+        Documentação da API
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M14 3h7v7" />
+          <path d="M10 14 21 3" />
+          <path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5" />
+        </svg>
+      </a>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/api.js" defer></script>
+  <script src="js/app.js" defer></script>
+</body>
+</html>
