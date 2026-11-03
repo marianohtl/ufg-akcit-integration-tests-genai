@@ -131,9 +131,18 @@ O experimento foi registrado no repositório público:
 **https://github.com/marianohtl/ufg-akcit-integration-tests-genai**
 
 - Branch: `main`.
-- Repositório criado vazio e utilizado para receber o projeto, as duas suítes de teste, os prompts
-  e esta documentação.
-- Commit inicial registrado após a execução das suítes.
+- Commit inicial: `ebd9136` — `feat: add integration test suites and prompt experiment docs`.
+- Repositório público utilizado para receber o projeto, as duas suítes de teste, os prompts e esta
+  documentação.
+- Push confirmado em 03/11/2026 (`main -> main`).
+
+```text
+$ git log -1 --oneline
+ebd9136 feat: add integration test suites and prompt experiment docs
+
+$ git ls-remote --heads origin
+ebd9136e436c8300268f1297dfe1c99f5f685266    refs/heads/main
+```
 
 ### Conteúdo publicado
 

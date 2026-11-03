@@ -20,26 +20,22 @@ projeto **Core Flashcards / Flashcard Service**.
 
 | Documento | Conteúdo |
 | --------- | -------- |
-| [Casos de teste](casos-de-teste.md) | Catálogo completo dos 21 casos, cobertura por dimensão e divergências. |
+| [Casos de teste](casos-de-teste.md) | Catálogo completo dos 22 casos, cobertura por dimensão e divergências. |
 | [Análise e ajustes](analise-e-ajustes.md) | Como cada tipo de prompt influenciou qualidade/diversidade e quais ajustes foram necessários. |
 | [Execução](execucao.md) | Ambiente, comandos, resultados das suítes e observações de execução. |
 
 ## Registro em repositório GitHub
 
-O experimento foi estruturado para ser versionado como um repositório GitHub contendo:
+O experimento foi publicado no repositório público:
 
-- a aplicação original;
-- os dois prompts em `prompts/`;
-- as duas suítes de teste;
-- esta documentação.
+**https://github.com/marianohtl/ufg-akcit-integration-tests-genai**
 
-O repositório Git local foi inicializado neste diretório. A publicação em `github.com` depende de
-credenciais de uma conta GitHub (`gh` autenticado ou token/SSH configurado), que não estão
-disponíveis no ambiente de execução. O procedimento para concluir a publicação está descrito em
-[Execução > Publicação no GitHub](execucao.md#publicação-no-github).
+- Branch: `main`.
+- Commit inicial: `ebd9136` — `feat: add integration test suites and prompt experiment docs`.
+- O repositório contém a aplicação, os dois prompts, as duas suítes de teste, o catálogo de casos,
+  a análise dos prompts e as evidências de execução.
 
-> Não foi inventada uma URL de repositório. Quando o remoto for configurado, este documento deve
-> ser atualizado com o link público/privado e o hash do commit correspondente.
+Detalhes do ambiente e da publicação estão em [Execução](execucao.md#6-publicação-no-github).
 
 ## Como reproduzir
 
@@ -82,5 +78,5 @@ npm run test:cors
 3. A sobreposição entre as suítes é pequena; elas se complementam.
 4. Os ajustes mais importantes foram: contrato explícito, política para divergências (spec ×
    implementação), separação do cenário CORS e isolamento de dados.
-5. A experimentação revelou quatro divergências entre a API e a especificação, mantidas como
+5. A experimentação revelou cinco divergências entre a API e a especificação, mantidas como
    testes `@Disabled` documentados para não mascarar os bugs.

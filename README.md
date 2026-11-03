@@ -87,7 +87,8 @@ This repository includes two complementary integration test suites generated fro
 - **End-to-end:** Playwright — see [`tests/e2e/README.md`](tests/e2e/README.md).
 
 The experiment report, test-case catalog, prompt analysis and execution evidence are in
-[`docs/testes-integracao/`](docs/testes-integracao/README.md).
+[`docs/testes-integracao/`](docs/testes-integracao/README.md), also published at
+[marianohtl/ufg-akcit-integration-tests-genai](https://github.com/marianohtl/ufg-akcit-integration-tests-genai).
 
 ---
 
