@@ -32,6 +32,7 @@ O experimento foi publicado no repositório público:
 
 - Branch: `main`.
 - Commit inicial: `ebd9136` — `feat: add integration test suites and prompt experiment docs`.
+- Commit de documentação/resultados: `cf31d6d` — `docs: record GitHub repository and execution results`.
 - O repositório contém a aplicação, os dois prompts, as duas suítes de teste, o catálogo de casos,
   a análise dos prompts e as evidências de execução.
 
